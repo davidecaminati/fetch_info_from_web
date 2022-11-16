@@ -15,12 +15,14 @@ wallbox_account = "xxxxxxxxxx@gmail.com"
 wallbox_password = "xxxxxxxxxx"
 mqtt_topic = "allarmi"
 mqtt_hostname = "192.168.0.2"
+charger_id = "12345"
 
 
 def riavvia_wallbox():
     try:
         driver_Wallbox = webdriver.Chrome()
-        driver_Wallbox.get("https://my.wallbox.com/chargers/210204")
+        url_to_open = "https://my.wallbox.com/chargers/" + charger_id
+        driver_Wallbox.get(url_to_open)
         driver_Wallbox.implicitly_wait(4)
         # Accedi btn
         driver_Wallbox.find_element(By.CLASS_NAME, "login-button").click()
@@ -38,7 +40,7 @@ def riavvia_wallbox():
         time.sleep(2)
         # Continue btn
         driver_Wallbox.find_element(By.CLASS_NAME, "button").click()
-        driver_Wallbox.get("https://my.wallbox.com/chargers/210204")
+        driver_Wallbox.get(url_to_open)
         # restart_button
         restart_button = driver_Wallbox.find_element(By.CLASS_NAME, "button")
         # print(restart_button.text)
